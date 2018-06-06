@@ -18,6 +18,7 @@ final class IssueCommentCodeBlockCell: IssueCommentBaseCell, ListBindable {
         bottom: Styles.Sizes.rowSpacing,
         right: 0
     )
+
     static let textViewInset = UIEdgeInsets(
         top: Styles.Sizes.rowSpacing,
         left: Styles.Sizes.commentGutter,

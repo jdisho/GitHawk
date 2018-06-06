@@ -41,9 +41,11 @@ final class IssueCommentSectionController:
     private lazy var webviewCache: WebviewCellHeightCache = {
         return WebviewCellHeightCache(sectionController: self)
     }()
+
     private lazy var photoHandler: PhotoViewHandler = {
         return PhotoViewHandler(viewController: self.viewController)
     }()
+
     private lazy var imageCache: ImageCellHeightCache = {
         return ImageCellHeightCache(sectionController: self)
     }()
@@ -102,12 +104,12 @@ final class IssueCommentSectionController:
             let message = NSLocalizedString("Deleting this comment is irreversible, do you want to continue?", comment: "")
             let alert = UIAlertController.configured(title: title, message: message, preferredStyle: .alert)
 
-            alert.addActions([
-                AlertAction.cancel(),
-                AlertAction.delete { [weak self] _ in
-                    self?.deleteComment()
-                }
-            ])
+            let cancelAction = AlertAction.cancel()
+            let deleteAction = AlertAction.delete { [weak self] _ in
+                self?.deleteComment()
+            }
+
+            alert.addActions([cancelAction, deleteAction])
 
             self?.viewController?.present(alert, animated: trueUnlessReduceMotionEnabled)
         }
@@ -301,8 +303,7 @@ final class IssueCommentSectionController:
         _ sectionController: ListBindingSectionController<ListDiffable>,
         viewModelsFor object: Any
         ) -> [ListDiffable] {
-        guard let object = self.object else { return [] }
-        guard !hasBeenDeleted else { return [] }
+        guard let object = self.object, !hasBeenDeleted else { return [] }
 
         var bodies = [ListDiffable]()
         let bodyModels = bodyEdits?.models ?? object.bodyModels

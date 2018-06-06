@@ -32,21 +32,8 @@ final class IssueCommentImageCell: IssueCommentBaseCell, ListBindable {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        imageView.contentMode = .scaleAspectFit
-        imageView.accessibilityIgnoresInvertColors = true
-        
-        contentView.addSubview(imageView)
-
-        spinner.hidesWhenStopped = true
-        contentView.addSubview(spinner)
-        spinner.snp.makeConstraints { make in
-            make.center.equalTo(imageView)
-        }
-
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(IssueCommentImageCell.onTap(recognizer:)))
-        tapGesture.require(toFail: doubleTapGesture)
-        tapGesture.delegate = self
-        contentView.addGestureRecognizer(tapGesture)
+        configureGesture()
+        contentView.addSubviews([configureImageView(), configureSpinner()])
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -61,6 +48,31 @@ final class IssueCommentImageCell: IssueCommentBaseCell, ListBindable {
             frame.size = BoundedImageSize(originalSize: size, containerWidth: frame.width)
         }
         imageView.frame = frame
+    }
+
+    // MARK: Configure UI
+    private func configureImageView() -> FLAnimatedImageView {
+        imageView.contentMode = .scaleAspectFit
+        imageView.accessibilityIgnoresInvertColors = true
+
+        return imageView
+    }
+
+    private func configureSpinner() -> UIActivityIndicatorView {
+        spinner.hidesWhenStopped = true
+        spinner.snp.makeConstraints { make in
+            make.center.equalTo(imageView)
+        }
+
+        return spinner
+    }
+
+    private func configureGesture() {
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(IssueCommentImageCell.onTap(recognizer:)))
+        tapGesture.require(toFail: doubleTapGesture)
+        tapGesture.delegate = self
+
+        contentView.addGestureRecognizer(tapGesture)
     }
 
     // MARK: Private API

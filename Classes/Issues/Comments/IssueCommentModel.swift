@@ -28,6 +28,7 @@ final class IssueCommentModel: ListDiffable {
         case neck
         case tail
     }
+    
     let threadState: ThreadState
 
     init(

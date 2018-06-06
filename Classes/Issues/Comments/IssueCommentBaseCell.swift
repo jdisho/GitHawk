@@ -38,22 +38,13 @@ class IssueCommentBaseCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 
         contentView.clipsToBounds = true
 
-        doubleTapGesture.addTarget(self, action: #selector(onDoubleTap))
-        doubleTapGesture.numberOfTapsRequired = 2
-        doubleTapGesture.delegate = self
-        addGestureRecognizer(doubleTapGesture)
-
         // insert above contentView layer
-        borderLayer.strokeColor = UIColor.red.cgColor
-        borderLayer.strokeColor = Styles.Colors.Gray.border.color.cgColor
-        borderLayer.lineWidth = 1 / UIScreen.main.scale
-        borderLayer.fillColor = nil
-        layer.addSublayer(borderLayer)
+
+        layer.addSublayer(configureBorderLayer())
 
         // insert as base layer
-        backgroundLayer.strokeColor = nil
-        backgroundLayer.fillColor = UIColor.white.cgColor
-        layer.insertSublayer(backgroundLayer, at: 0)
+
+        layer.insertSublayer(configureBackgroundLayer(), at: 0)
 
         collapseLayer.isHidden = true
         collapseLayer.colors = [
@@ -61,6 +52,38 @@ class IssueCommentBaseCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             UIColor(white: 1, alpha: 1).cgColor
         ]
 
+        contentView.addSubview(configureCollapseButton())
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Configure UI
+    private func configureDoubleTapGesture() {
+        doubleTapGesture.addTarget(self, action: #selector(onDoubleTap))
+        doubleTapGesture.numberOfTapsRequired = 2
+        doubleTapGesture.delegate = self
+        addGestureRecognizer(doubleTapGesture)
+    }
+
+    private func configureBorderLayer() -> CAShapeLayer {
+        borderLayer.strokeColor = UIColor.red.cgColor
+        borderLayer.strokeColor = Styles.Colors.Gray.border.color.cgColor
+        borderLayer.lineWidth = 1 / UIScreen.main.scale
+        borderLayer.fillColor = nil
+
+        return borderLayer
+    }
+
+    private func configureBackgroundLayer() -> CAShapeLayer {
+        backgroundLayer.strokeColor = nil
+        backgroundLayer.fillColor = UIColor.white.cgColor
+
+        return backgroundLayer
+    }
+
+    private func configureCollapseButton() -> UIButton {
         collapseButton.setImage(UIImage(named: "bullets")?.withRenderingMode(.alwaysTemplate), for: .normal)
         collapseButton.backgroundColor = Styles.Colors.Blue.medium.color
         collapseButton.accessibilityTraits = UIAccessibilityTraitNone
@@ -73,12 +96,10 @@ class IssueCommentBaseCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         collapseButton.sizeToFit()
         collapseButton.layer.cornerRadius = collapseButton.bounds.height / 2
         collapseButton.isUserInteractionEnabled = false // allow tap to pass through to cell
-        contentView.addSubview(collapseButton)
-    }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        return collapseButton
     }
+    
 
     override func layoutSubviews() {
         super.layoutSubviews()

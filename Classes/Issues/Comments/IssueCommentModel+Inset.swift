@@ -16,11 +16,9 @@ extension IssueCommentModel {
         switch threadState {
         case .single:
             // title and other header objects will have bottom insetting
-            if isRoot {
-                return UIEdgeInsets(top: 12, left: 0, bottom: rowSpacing, right: 0)
-            } else {
-                return UIEdgeInsets(top: rowSpacing, left: 0, bottom: rowSpacing, right: 0)
-            }
+            return isRoot
+                ? UIEdgeInsets(top: 12, left: 0, bottom: rowSpacing, right: 0)
+                : UIEdgeInsets(top: rowSpacing, left: 0, bottom: rowSpacing, right: 0)
         case .neck:
             return .zero
         case .tail:

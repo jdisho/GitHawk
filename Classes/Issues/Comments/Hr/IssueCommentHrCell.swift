@@ -24,15 +24,21 @@ final class IssueCommentHrCell: IssueCommentBaseCell, ListBindable {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        hr.backgroundColor = Styles.Colors.Gray.lighter.color
-        contentView.addSubview(hr)
-        hr.snp.makeConstraints { make in
-            make.edges.equalTo(contentView).inset(IssueCommentHrCell.inset)
-        }
+       contentView.addSubview(configureHRView())
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Configure UI
+    private func configureHRView() -> UIView {
+        hr.backgroundColor = Styles.Colors.Gray.lighter.color
+        hr.snp.makeConstraints { make in
+            make.edges.equalTo(contentView).inset(IssueCommentHrCell.inset)
+        }
+
+        return hr
     }
 
     // MARK: ListBindable

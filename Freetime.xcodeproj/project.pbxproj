@@ -458,6 +458,8 @@
 		DCA5ED1B1FAEF78B0072F074 /* BookmarkSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5ED1A1FAEF78B0072F074 /* BookmarkSectionController.swift */; };
 		DCA5ED1D1FAEF9EE0072F074 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5ED1C1FAEF9EE0072F074 /* BookmarkCell.swift */; };
 		DCD421C91FAFC049008CC2EC /* BookmarkHeaderSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD421C81FAFC049008CC2EC /* BookmarkHeaderSectionController.swift */; };
+		DCDEEE2F20C869AF00A6C763 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDEEE2E20C869AF00A6C763 /* UIView+Extensions.swift */; };
+		DCDEEE3020C869AF00A6C763 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDEEE2E20C869AF00A6C763 /* UIView+Extensions.swift */; };
 		FB9E0B1189A32219A0710FA2 /* Pods_FreetimeWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D396E0DA66FED629384A84BC /* Pods_FreetimeWatch.framework */; };
 /* End PBXBuildFile section */
 
@@ -982,6 +984,7 @@
 		DCA5ED1A1FAEF78B0072F074 /* BookmarkSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSectionController.swift; sourceTree = "<group>"; };
 		DCA5ED1C1FAEF9EE0072F074 /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		DCD421C81FAFC049008CC2EC /* BookmarkHeaderSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkHeaderSectionController.swift; sourceTree = "<group>"; };
+		DCDEEE2E20C869AF00A6C763 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		E5DE3DA77D75FB9DC994EFC1 /* Pods-FreetimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreetimeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FreetimeTests/Pods-FreetimeTests.release.xcconfig"; sourceTree = "<group>"; };
 		E6EF57A6CF52B90990B21F83 /* Pods-FreetimeWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreetimeWatch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-FreetimeWatch Extension/Pods-FreetimeWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
 		ECF622FFD773FDA73297C0D0 /* Pods_Freetime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Freetime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1715,6 +1718,7 @@
 				292FF8B11F302FE7009E63F7 /* UITextView+SelectedRange.swift */,
 				298BA08E1EC90FEE00B01946 /* UIView+BottomBorder.swift */,
 				299F63E1205DE1470015D901 /* UIView+DateDetails.swift */,
+				DCDEEE2E20C869AF00A6C763 /* UIView+Extensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2676,6 +2680,7 @@
 				291929421F3EA8CD0012067B /* File.swift in Sources */,
 				299E86491EFD9DBB00E5FE70 /* FlexController.m in Sources */,
 				29EB1EEF1F425E5100A200B4 /* ForegroundHandler.swift in Sources */,
+				DCDEEE2F20C869AF00A6C763 /* UIView+Extensions.swift in Sources */,
 				29C167741ECA0DBB00439D62 /* GithubAPIDateFormatter.swift in Sources */,
 				294434E11FB1F2DA00050C06 /* BookmarkNavigationController.swift in Sources */,
 				15245487205DC016005810A6 /* IssueTargetBranchModel.swift in Sources */,
@@ -3042,6 +3047,7 @@
 				DC60C6CB1F98341900241271 /* SearchEmptyViewTests.swift in Sources */,
 				293A45771F296B7E00DD1006 /* ListKitTestCase.swift in Sources */,
 				BD89007E20B8844B0026013F /* NetworkingURLPathTests.swift in Sources */,
+				DCDEEE3020C869AF00A6C763 /* UIView+Extensions.swift in Sources */,
 				BD3761B0209E032500401DFB /* BookmarkNavigationItemTests.swift in Sources */,
 				DC5C02C51F9C6E3500E80B9F /* SearchQueryTests.swift in Sources */,
 				293A457E1F296BD500DD1006 /* API.swift in Sources */,

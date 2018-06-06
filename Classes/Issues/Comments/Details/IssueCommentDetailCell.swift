@@ -31,42 +31,71 @@ final class IssueCommentDetailCell: IssueCommentBaseCell, ListBindable {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        let subViews = [
+            configureImageView(),
+            configureLoginLabel(),
+            configureDateLabel(),
+            configureMoreButton(),
+            configureEditedLabel()
+        ]
+
+        contentView.addSubviews(subViews)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Configure UI
+
+    private func configureImageView() -> UIImageView {
         imageView.configureForAvatar()
         imageView.isUserInteractionEnabled = true
         imageView.accessibilityIgnoresInvertColors = true
-        
+
         imageView.addGestureRecognizer(UITapGestureRecognizer(
             target: self,
             action: #selector(IssueCommentDetailCell.onTapAvatar))
         )
-        contentView.addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.size.equalTo(Styles.Sizes.avatar)
             make.left.equalTo(Styles.Sizes.commentGutter)
             make.top.equalTo(Styles.Sizes.rowSpacing)
         }
 
+        return imageView
+    }
+
+    private func configureLoginLabel() -> UILabel {
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(IssueCommentDetailCell.onTapLoginLabel)
+        )
         loginLabel.font = Styles.Text.title.preferredFont
         loginLabel.textColor = Styles.Colors.Gray.dark.color
         loginLabel.isUserInteractionEnabled = true
-        loginLabel.addGestureRecognizer(UITapGestureRecognizer(
-            target: self,
-            action: #selector(IssueCommentDetailCell.onTapLoginLabel))
-        )
-        contentView.addSubview(loginLabel)
+        loginLabel.addGestureRecognizer(tapGestureRecognizer)
         loginLabel.snp.makeConstraints { make in
             make.bottom.equalTo(imageView.snp.centerY)
             make.left.equalTo(imageView.snp.right).offset(Styles.Sizes.columnSpacing)
         }
 
+        return loginLabel
+    }
+
+    private func configureDateLabel() -> ShowMoreDetailsLabel {
         dateLabel.font = Styles.Text.secondary.preferredFont
         dateLabel.textColor = Styles.Colors.Gray.light.color
-        contentView.addSubview(dateLabel)
+
         dateLabel.snp.makeConstraints { make in
             make.left.equalTo(loginLabel)
             make.top.equalTo(loginLabel.snp.bottom)
         }
 
+        return dateLabel
+    }
+
+    private func configureMoreButton() -> UIButton {
         moreButton.setImage(UIImage(named: "bullets")?.withRenderingMode(.alwaysTemplate), for: .normal)
         moreButton.contentVerticalAlignment = .center
         moreButton.contentHorizontalAlignment = .right
@@ -74,24 +103,25 @@ final class IssueCommentDetailCell: IssueCommentBaseCell, ListBindable {
         moreButton.tintColor = Styles.Colors.Gray.light.color
         moreButton.addTarget(self, action: #selector(IssueCommentDetailCell.onMore(sender:)), for: .touchUpInside)
         moreButton.accessibilityLabel = NSLocalizedString("More options", comment: "")
-        contentView.addSubview(moreButton)
+
         moreButton.snp.makeConstraints { make in
             make.size.equalTo(Styles.Sizes.buttonMin)
             make.centerY.equalTo(imageView)
             make.right.equalTo(-Styles.Sizes.commentGutter)
         }
 
+        return moreButton
+    }
+
+    private func configureEditedLabel() -> ShowMoreDetailsLabel {
         editedLabel.font = Styles.Text.secondary.preferredFont
         editedLabel.textColor = Styles.Colors.Gray.light.color
-        contentView.addSubview(editedLabel)
         editedLabel.snp.makeConstraints { make in
             make.left.equalTo(dateLabel.snp.right).offset(Styles.Sizes.inlineSpacing)
             make.centerY.equalTo(dateLabel)
         }
-    }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        return editedLabel
     }
 
     // MARK: Public API
