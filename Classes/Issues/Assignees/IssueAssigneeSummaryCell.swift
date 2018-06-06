@@ -58,7 +58,7 @@ final class IssueAssigneeSummaryCell: UICollectionViewCell, UICollectionViewData
 
         let height = contentView.bounds.height
         let size = (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize ?? .zero
-        let inset = (height - size.height)/2
+        let inset = (height - size.height) / 2
         collectionView.contentInset = UIEdgeInsets(top: inset, left: 0, bottom: inset, right: 0)
     }
 

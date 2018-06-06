@@ -37,8 +37,10 @@ ListBindingSectionControllerSelectionDelegate {
 
         let title: String
         switch object.type {
-        case .assigned: title = NSLocalizedString("Assignees:", comment: "")
-        case .reviewRequested: title = NSLocalizedString("Reviewers:", comment: "")
+        case .assigned:
+            title = NSLocalizedString("Assignees:", comment: "")
+        case .reviewRequested:
+            title = NSLocalizedString("Reviewers:", comment: "")
         }
         let urls = object.users.map { $0.avatarURL }
 
@@ -78,9 +80,12 @@ ListBindingSectionControllerSelectionDelegate {
             else { fatalError("Collection context must be set") }
         let cellClass: AnyClass
         switch viewModel {
-        case is IssueAssigneeSummaryModel: cellClass = IssueAssigneeSummaryCell.self
-        case is IssueAssigneeViewModel: cellClass = IssueAssigneeUserCell.self
-        default: fatalError("Unsupported model \(viewModel)")
+        case is IssueAssigneeSummaryModel:
+            cellClass = IssueAssigneeSummaryCell.self
+        case is IssueAssigneeViewModel:
+            cellClass = IssueAssigneeUserCell.self
+        default:
+            fatalError("Unsupported model \(viewModel)")
         }
         guard let cell = context.dequeueReusableCell(of: cellClass, for: self, at: index) as? UICollectionViewCell & ListBindable
             else { fatalError("Cell not bindable") }

@@ -10,26 +10,42 @@ import UIKit
 
 extension UIColor {
 
-    // http://stackoverflow.com/a/27203691/940936
-    public static func fromHex(_ hex: String) -> UIColor {
-        var cString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-
-        if cString.hasPrefix("#") {
-            cString.remove(at: cString.startIndex)
+    public static func fromHex(_ hex: String, alpha: Double = 1.0) -> UIColor {
+        var hexString = ""
+        if hex.lowercased().hasPrefix("0x") {
+            hexString =  hex.replacingOccurrences(of: "0x", with: "")
+        } else if hex.hasPrefix("#") {
+            hexString = hex.replacingOccurrences(of: "#", with: "")
+        } else {
+            hexString = hex
         }
 
-        if cString.count != 6 {
-            return .gray
+        if hexString.count == 3 {
+            var string = ""
+            hexString.forEach {
+                string.append(String(repeating: $0, count: 2))
+            }
+            hexString = string
         }
 
-        var rgbValue: UInt32 = 0
-        Scanner(string: cString).scanHexInt32(&rgbValue)
+        guard hexString.count < 6,
+            let hexValue = Int(hexString, radix: 16) else {
+                return .gray
+            }
+
+        var alphaCopy = alpha
+        if alphaCopy < 0 { alphaCopy = 0.0 }
+        if alphaCopy > 1 { alphaCopy = 1.0 }
+
+        let red = CGFloat((hexValue >> 16) & 0xff) / 255.0
+        let green = CGFloat((hexValue >> 8) & 0xff) / 255.0
+        let blue = CGFloat(hexValue & 0xff) / 255.0
 
         return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
+            red: red,
+            green: green,
+            blue: blue,
+            alpha: CGFloat(alphaCopy)
         )
     }
 
